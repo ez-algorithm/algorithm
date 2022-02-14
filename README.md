@@ -1,7 +1,11 @@
 # 🎉 Algorithm Study! 🎉
 
 알고리즘 스터디를 위한 저장소입니다.
-
+<h4>
+    <a href="https://www.notion.so/9fb55ff4ea70445db0bb685e8c0785b3">
+       스터디 노션으로 가기
+    </a>
+</h4>
 
 
 ## 운영 규칙
