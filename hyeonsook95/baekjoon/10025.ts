@@ -14,6 +14,7 @@ var end = (2 * K + 1) > 1000001 ? 1000001 : (2 * K + 1);
 for (var idx = 0; idx < end; idx++) {
     result += maps[idx];
 }
+
 var left = 0;
 var right = 2 * K;
 var pSum = result;
