@@ -1,34 +1,44 @@
 import sys
+from collections import defaultdict, deque
 
 MAX = 1000000001
 input = sys.stdin.readline
 
-
 N, Q = map(int, input().split())
 
-path = [[False for _ in range(N + 1)] for _ in range(N + 1)]
+graph = defaultdict(list)
 weights = [[MAX for _ in range(N + 1)] for _ in range(N + 1)]
 
 for _ in range(N - 1):
     p, q, r = map(int, input().split())
 
-    path[p][q] = True
-    path[q][p] = True
+    graph[p].append(q)
+    graph[q].append(p)
 
     # 가중치 입력
     weights[p][q] = r
     weights[q][p] = r
 
-# 플로이드 와샬
-for k in range(1, N + 1):
-    for i in range(1, N + 1):
-        for j in range(1, N + 1):
-            if i == j:
-                continue
-            if path[i][k] and path[k][j]:
-                weights[i][j] = min([weights[i][j], weights[i][k], weights[k][j]])
+# bfs
+def bfs(start_v):
+    visited = [False for _ in range(N + 1)]
+    visited[start_v] = True
+    usado = [MAX for _ in range(N + 1)]
+    queue = deque([start_v])
+
+    while queue:
+        v = queue.popleft()
+        for w in graph[v]:
+            if not visited[w]:
+                usado[w] = min([usado[w], usado[v], weights[v][w]])
+
+                visited[w] = True
+                queue.append(w)
+    return usado
+
 
 # v 영상과 k 이상의 유사도를 가진 영상의 개수
 for _ in range(Q):
     k, v = map(int, input().split())
-    print(len([w for w in weights[v] if k <= w]) - 2)
+    usado = bfs(v)
+    print(len([w for w in usado if k <= w]) - 2)
