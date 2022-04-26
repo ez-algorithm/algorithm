@@ -9,21 +9,21 @@ public:
         if(!isZero(nums, 0)) return true;
         int lastIdx = nums.size()-1;
 
-        vector<int> t;
-        t.assign(nums.size(), 0);
+        vector<int> visit;
+        visit.assign(nums.size(), 0);
 
-        t[0] = 1;
+        visit[0] = 1;
 
         for(int i=0; i<nums.size(); i++){
-            if(lastIdx == i) return true;
-            if(t[i] == 1){
+            if(visit[lastIdx] == 1) return true;
+            if(visit[i] == 1){
                 int tmp = i+1;
                 
-				for(int j=0; j<nums[i]; j++){
+            for(int j=0; j<nums[i]; j++){
                     // overflow 
                     if(tmp > lastIdx)break;
                    
-                    t[tmp] = 1;
+                    visit[tmp] = 1;
                     tmp++;
                 }
             }
