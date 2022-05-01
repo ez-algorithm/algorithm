@@ -1,7 +1,5 @@
 class Solution:
     def longestCommonPrefix(self, strs):
-        strs = sorted(strs, key=lambda s: len(s))
-
         prefix = strs[0]
         start, end = 0, len(prefix)
 
@@ -9,5 +7,7 @@ class Solution:
             while prefix and prefix != chars[start:end]:
                 end -= 1
                 prefix = prefix[start:end]
+            if not prefix:
+                return prefix
 
         return prefix
