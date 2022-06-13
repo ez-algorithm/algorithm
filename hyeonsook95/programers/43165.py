@@ -1,11 +1,12 @@
-from itertools import product
-
-
 def solution(numbers, target):
-    cnt = 0
-    n = len(numbers)
-    numbers = [[-number, number] for number in numbers]
-    for num in product(*numbers):
-        if sum(num) == target:
-            cnt += 1
-    return cnt
+    def dfs(idx, sum, case):
+        if idx == len(numbers):
+            if target == sum:
+                return case + 1
+            return case
+
+        for t in [1, -1]:
+            case = dfs(idx + 1, (sum + numbers[idx] * t), case)
+        return case
+
+    return dfs(0, 0, 0)
