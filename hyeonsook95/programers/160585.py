@@ -16,7 +16,6 @@ def solution(board):
     
     fc = sum([board[0][0], board[1][1], board[2][2]])
     sc = sum([board[0][2], board[1][1], board[2][0]])
-
     if fc == 3 or sc == 3:
         fw += 1
     if fc == -3 or sc == -3:
